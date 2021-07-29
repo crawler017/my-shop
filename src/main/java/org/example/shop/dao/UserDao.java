@@ -5,7 +5,7 @@ import org.example.shop.entity.User;
 public interface UserDao {
 
     /**
-     * get User by email and password
+     * get User with email and password
      * @param email
      * @param password
      * @return User
