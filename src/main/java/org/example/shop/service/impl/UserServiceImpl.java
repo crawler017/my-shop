@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     @Qualifier("userDao")
     private UserDao userDao;
+
     @Override
     public User login(String email, String password) {
         return userDao.getUser(email, password);
