@@ -22,7 +22,8 @@ public class LoginTest {
     public void test01() {
         User user = userService.login("1140@gmail.com", "1234");
         if (user !=null) {
-            System.out.println(user);
+            System.out.println(user.getEmail());
+            System.out.println(user.getUsername());
         }
         else
             System.out.println("error");

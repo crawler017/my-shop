@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
             if ("1234".equals(password)) {
                 user = new User();
                 user.setUsername("admin");
-                user.setEmail("1140@gmail,com");
+                user.setEmail("1140@gmail.com");
             }
         }
         return user;
