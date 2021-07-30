@@ -6,9 +6,9 @@ public interface UserService {
 
     /**
      * login
-     * @param username
+     * @param email
      * @param password
      * @return User
      */
-    public User login(String username, String password);
+    public User login(String email, String password);
 }
