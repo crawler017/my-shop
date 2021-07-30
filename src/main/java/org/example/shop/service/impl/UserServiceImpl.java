@@ -9,9 +9,6 @@ import org.example.shop.service.UserService;
 //@Qualifier("UserService")
 public class UserServiceImpl implements UserService {
 
-
-
-
     @Override
     public User login(String email, String password) {
         SpringContext springContext = new SpringContext();

@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +18,13 @@
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
+
+    <div class="alert alert-warning alert-dismissible" ${message == null ? "style='display:none;'" : ""}>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        ${message}
+    </div>
+
+
 <div class="login-box">
     <div class="login-logo">
         <a href="#"><b>My</b>Shop</a>
@@ -23,7 +33,6 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-
             <form action="login" method="post">
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" name="email" placeholder="Email">

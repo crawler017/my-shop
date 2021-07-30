@@ -39,6 +39,13 @@ public class LoginController extends HttpServlet {
             } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            req.setAttribute("message", "incorrect username or password");
+            try {
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
