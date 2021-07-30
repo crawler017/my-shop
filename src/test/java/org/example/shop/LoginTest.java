@@ -3,7 +3,6 @@ package org.example.shop;
 import org.example.shop.commons.ShopConfig;
 import org.example.shop.entity.User;
 import org.example.shop.service.UserService;
-import org.example.shop.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
