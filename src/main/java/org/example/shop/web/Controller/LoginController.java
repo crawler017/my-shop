@@ -18,6 +18,7 @@ public class LoginController extends HttpServlet {
 //    @Autowired
 //    @Qualifier("userService")
 
+    private static final UserService userService = SpringContext.getBean("userService");
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     @Override
@@ -29,8 +30,6 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        SpringContext springContext = new SpringContext();
-        UserService userService = (UserService) springContext.getBean("userService");
 
         logger.info("user \"{}\" 's password: {}", email, password);
         if (null != userService.login(email, password)) {
@@ -47,6 +46,5 @@ public class LoginController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
     }
 }

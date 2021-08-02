@@ -9,10 +9,10 @@ import org.example.shop.service.UserService;
 //@Qualifier("UserService")
 public class UserServiceImpl implements UserService {
 
+    private final UserDao userDao = SpringContext.getBean("userDao");
+
     @Override
     public User login(String email, String password) {
-        SpringContext springContext = new SpringContext();
-        UserDao userDao = (UserDao) springContext.getBean("userDao");
         return userDao.getUser(email, password);
     }
 }
