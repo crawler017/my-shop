@@ -2,38 +2,48 @@ package org.example.shop.web.Controller;
 
 import org.example.shop.commons.context.SpringContext;
 import org.example.shop.dao.impl.UserDaoImpl;
+import org.example.shop.entity.User;
 import org.example.shop.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LoginController extends HttpServlet {
-
-
 //    @Autowired
 //    @Qualifier("userService")
 
+    private static final long serialVersionUID = 1L;
     private static final UserService userService = SpringContext.getBean("userService");
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
+
         logger.info("user \"{}\" 's password: {}", email, password);
-        if (null != userService.login(email, password)) {
+        User user;
+        if (null != (user = userService.login(email, password))) {
             try {
+                // set session
+                req.getSession().setAttribute("user", req.getRemoteAddr()+email);
+                // set cookie
+                Cookie c = new Cookie("autologin", email+"-"+password);
+                c.setMaxAge(60*100);
+                c.setPath("/");
+                resp.addCookie(c);
                 req.getRequestDispatcher("login.html").forward(req, resp);
             } catch (ServletException | IOException e) {
                 e.printStackTrace();
