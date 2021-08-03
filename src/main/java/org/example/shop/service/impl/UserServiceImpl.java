@@ -6,7 +6,6 @@ import org.example.shop.entity.User;
 import org.example.shop.service.UserService;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 
 //@Component
 //@Qualifier("UserService")
