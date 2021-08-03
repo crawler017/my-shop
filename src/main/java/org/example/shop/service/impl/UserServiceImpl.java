@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 
 //@Component
 //@Qualifier("UserService")
-@Service(value = "userService")
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao = SpringContext.getBean("userDao");

@@ -8,7 +8,9 @@
 <!--    <bean id="springContext" class="org.example.shop.commons.context.SpringContext" />-->
 
     <context:annotation-config />
-    <context:component-scan base-package="org.example.shop" />
+    <context:component-scan base-package="org.example.shop" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
 <!--    <bean id="userDao" class="org.example.shop.dao.impl.UserDaoImpl" />-->
 

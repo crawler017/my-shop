@@ -1,14 +1,14 @@
 package org.example.shop.web.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.example.shop.commons.context.SpringContext;
+import org.example.shop.commons.utils.CookieUtils;
 import org.example.shop.service.UserService;
 
 import javax.servlet.*;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class LoginFilter implements Filter {
 
@@ -24,25 +24,18 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        System.out.println("+++++++++++++++++++++++++++++++" + Arrays.toString(req.getCookies()));
-        if (null != req.getCookies()) {
-            Cookie[] cookies = req.getCookies();
-            if (cookies != null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    if ("autoLogin".equalsIgnoreCase(cookies[i].getName())) {
-                        String date = cookies[i].getValue();
-                        String username = date.split("-")[0];
-                        String password = date.split("-")[1];
+        String cookie = CookieUtils.getCookieValue(req, "autologin");
+        if (!StringUtils.isBlank(cookie)) {
+            String username = cookie.split("-")[0];
+            String password = cookie.split("-")[1];
 
-                        if (null != userService.login(username, password)) {
-                            request.getRequestDispatcher("login.html").forward(req, resp);
-                        } else {
-                            chain.doFilter(req, resp);
-                        }
-                    }
-                }
+            if (null != userService.login(username, password)) {
+                request.getRequestDispatcher("main.jsp").forward(req, resp);
+            } else {
+                chain.doFilter(req, resp);
             }
         }
+
         chain.doFilter(req, resp);
     }
 
